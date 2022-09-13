@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>registration</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+    
+    <div class="form-group">
+        <label for="email">name:</label>
+        <input type="text" class="form-control" id="name" onchange="nameChangeEvent()" placeholder="Enter email" name="name">
+        <span id="nameError" style="color: red"></span>
+        </div>
+    <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+        <span id="emailError"></span>
+    </div>
+    <div class="form-group">
+        <label for="pwd">Password:</label>
+        <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd">
+    </div>
+
+    <button type="submit" onclick="" id="submit" class="btn btn-default">Submit</button>
+
+</body>
+</html>
+
+<script>
+
+    function nameChangeEvent(){
+        let name = $("#name").val()
+        console.log("name", name, name.length)
+        if(name.length < 5){
+            $("#nameError").show()
+            $("#nameError").html("please enter valid name")
+        }else{
+            $("#nameError").hide()
+        }
+    }
+    
+
+    $("#submit").click(()=>{
+        
+        let name = $("#name").val()
+        let email = $("#email").val()
+        let password = $("#pwd").val()
+
+        const data = {}
+        data.name = name
+        data.email = email
+        data.password = password
+        
+        fetch("http://localhost:8000",
+            method="post",
+            data=data
+        )
+    })
+</script>
